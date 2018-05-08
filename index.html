@@ -3,19 +3,51 @@
   <head>
     <title> Understanding Dyslexia </title>
 
+    <!-- Viewport settings-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/textstyle.css">
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css">
 
   </head>
 
 
-  <body style="background-color: red">
+  <body>
+    <header style="margin-bottom: 10px; margin-top: 10px;">
+      <h1 style="text-align: center; font-weight: bold;">
+        UNDERSTANDING DYSLEXIA
+      </h1>
+    </header>
+    
+    <!-- -->
+    <!-- Wrapper for the screen space for the game -->
+    <div id="wrapper" class="center">
 
-    <div id="wrapper" style="background-color: lightblue">
+      <!-- All of the elements below will be replaced when the player presses the button to continue -->
+      <h1 class="text_h1_center">Welcome</h1>
+      <p class="text_info">
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        Placeholder text about dyslexia here.Placeholder text about dyslexia here.
+        You are encouraged to read the text in the visualisations aloud.
+      </p>
+
+      <div class="div_button_continue">
+        <button id="start_button" class="btn btn-info">Continue</button>
+      </div>  
+
+      <!--
       <p>
         There once was a lady with pride,<br>
         <backward>who ate fourteen green apples and died.</backward><br>
@@ -24,27 +56,26 @@
         and made cider inside her insides.
       </p>
 
+      <h2>This is a heading</h2>
+
+      <p>This is a paragraph.</p>
+      <p id="testText">This text will be scrambled.</p>
+
+      <button>Click me</button>
+
+      <canvas id='canvas'></canvas>
+
+      <span style="text-gravity: inverse">
+        write upside down text
+      </span>
+      -->
+
     </div>
 
 
-    <h2>This is a heading</h2>
+    
 
-    <p>This is a paragraph.</p>
-    <p id="testText">This text will be scrambled.</p>
-
-    <button>Click me</button>
-
-    <canvas id='canvas'></canvas>
-
-    <h3 style="letter-spacing: -5px">This is heading 3</h3>
-    <h3 style="letter-spacing: -4px">This is heading 3</h3>
-
-    <span style="text-gravity: inverse">
-    write upside down text
-    </span>
-
-
-
+    <script type="text/javascript" src="scripts/data.js"></script>
     <script type="text/javascript" src="scripts/main.js"></script>
 
   </body>

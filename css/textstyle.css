@@ -4,3 +4,12 @@ backward {
     -webkit-transform: scale(-1, 1);  
     transform: scale(-1, 1); 
 } 
+
+.text_h1_center{
+	text-align: center; 
+	font-weight: bold;"
+}
+
+.text_info{
+	text-align: justify;
+}
