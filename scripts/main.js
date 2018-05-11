@@ -51,13 +51,13 @@ $(document).ready(function(){
 
    		switch (screenIndex) {
    			case 2:   				
-   				drawSpacingVisual(currentSentenceToVisualise);
+   				drawPushedTogetherVisual(currentSentenceToVisualise);
    				break;
 		    case 4:
 		        drawReversedWordsVisual(currentSentenceToVisualise);
 		        break;
 		    case 6: 
-		    	drawVisualForString(currentSentenceToVisualise);
+		    	drawCEOVisual(currentSentenceToVisualise);
 		        break;
 		    case 8:
 		        drawDQBPVisual(currentSentenceToVisualise);
@@ -67,7 +67,7 @@ $(document).ready(function(){
 		        swapLettersInInput = true;
 		        break;
 		    case 12:
-		        drawVisualForString(currentSentenceToVisualise);
+		        drawIncorrectSpacingVisual(currentSentenceToVisualise);
 		        swapLettersInInput = false;
 		        break;
 		    case 14:
@@ -176,6 +176,13 @@ $(document).ready(function(){
 	/*                      LISTENERS                        */
 	/*                                                       */
 	/* ***************************************************** */
+
+
+	// Allow submission of the answer by pressing the enter-key.
+	$("#wrapper").on("keyup", "input.form-control", function(event){
+		if (event.keyCode === 13) // Enter key.
+	        $("#submit_button").click();
+	});
 
 
 	// When the game is first launched and the start button is clicked.
@@ -408,7 +415,7 @@ $(document).ready(function(){
 		var label = $("<label for='answer' id='input_label' style='font-style: italic;'>Type what you think it says:</label>");
 		label.addClass("grey_text");
 		var inputField = $("<input type='text' class='form-control' id='input_answer' style='margin-bottom: 1%;'>");
-		var submitButton = $("<button class='button_submit_class'>Submit</button>");
+		var submitButton = $("<button class='button_submit_class' id='submit_button'>Submit</button>");
 		submitButton.addClass("btn btn-default");
 
 		divForInput.append(line, label, inputField, submitButton);
@@ -442,7 +449,56 @@ $(document).ready(function(){
 	/* ***************************************************** */
 
 
-	// Preparation for the visual for swapping d/q and b/p.
+	// Preparation for the visual for reversed words. (Visualisation 2)
+	function prepareStringReversedWords(str){
+		// Split by white space.
+		var stringArray = str.split(/(\s+)/);
+
+   		// Reverse each one.
+   		var reversedWordsSummed = ""; 
+   		for(var i = 0; i < stringArray.length; i++){
+   			reversedWordsSummed += reverseString(stringArray[i]);
+   		}	
+
+   		return reversedWordsSummed.toLowerCase();
+	}
+
+
+	// Preparation for the visual for e, c and o. (Visualisation 3)
+	function prepareStringCEOVisual(str){
+		// ta random switch satsen ovan där de tre olika casen är byta med e,c,o
+		var tempString = "";
+
+		// Take each char in the sentence and look for an c, e or o. 
+		for(var i = 0; i < str.length; i++){
+
+			if(str[i] === "c" || str[i] === "e" || str[i] === "o"){
+				var randomNr = getRandomNumber(0, 2);
+
+				// Perform a case.
+				switch (randomNr) {
+		   			case 0: // c
+				        tempString += "c";
+				        break;
+				    case 1: // e	
+						tempString += "e";
+				        break;
+				    case 2: // o
+				    	tempString += "o";
+				        break;
+				    case 3:
+				}
+			}
+			else{
+				tempString += str[i];
+			}			
+		}
+		console.log(tempString);
+		return tempString;
+	}
+
+
+	// Preparation for the visual for swapping d/q and b/p. (Visualisation 4)
 	function prepareStringDQBPVisual(str){
 		var summedString = "";
 
@@ -472,21 +528,36 @@ $(document).ready(function(){
 	}
 
 
-	// Preparation for the visual for reversed words.
-	function prepareStringReversedWords(str){
-		// Split by white space.
-		var stringArray = str.split(/(\s+)/);
+	// Preparation for the visual for incorrect spacing. (Visualisation 6)
+	function prepareStringIncorrectSpacingVisual(str){	
+		var tempString = "";
 
-   		// Reverse each one.
-   		var reversedWordsSummed = ""; 
-   		for(var i = 0; i < stringArray.length; i++){
-   			reversedWordsSummed += reverseString(stringArray[i]);
-   		}	
+		// Remove all white spaces.
+		var removedWhiteSpaces = str.replace(/\s+/g, '');			
 
-   		return reversedWordsSummed.toLowerCase();
+		// Insert random white spaces.
+		for(var i = 0; i < removedWhiteSpaces.length; i++){
+			// Get random number.
+			var randomNr = getRandomNumber(1, 7);
+
+			// Copy as many chars as the random number.
+			for(var j = 0; j <= randomNr; j++){	
+				if((i + j) < removedWhiteSpaces.length)			
+					tempString += removedWhiteSpaces[i + j];					
+			}
+
+			// Then add the white space after.
+			tempString += " "; 
+
+			// Update the iterator "i".
+			i = i + randomNr;
+						
+		}
+		return tempString;
 	}
+	
 
-	// Preparation for the visual for backwards and upside down.
+	// Preparation for the visual for backwards and upside down. (Visualisation 7)
 	function prepareStringBackwardsUpsidedown(str){
 		var tempString = "";
 
@@ -522,10 +593,7 @@ $(document).ready(function(){
 		return stringToVisualise;
 	}
 
-	// Preparation for visualisation 6 
-	function prepareStringSpacedWrongVisual(str){
 
-	}
 
 	/* ***************************************************** */
 	/*                    VISUALISATIONS                     */
@@ -538,56 +606,12 @@ $(document).ready(function(){
 	//	 - Jumping letters (Call this last)
 	// 	 - Pushed together (Call this last)
 	// 	 - Backwards & upside down (Call this last)
-
-	// Functions that prepare the string in different ways.
-	// för vis: 3, 6
-
-	function drawDQBPVisual(visualisationSentence){
-		drawVisualForString( prepareStringDQBPVisual(visualisationSentence) );
-	}
+	/* ***************************************************** */
 
 
-	// Visualisation: Some words might appear backwards.
-	// "The letters of some words might appear completely backwards, such as the word bird looking like drib"
-	function drawReversedWordsVisual(visualisationSentence){
-		drawVisualForString( prepareStringReversedWords(visualisationSentence) );
-	}
-
-
-	// TODO: Fixa den här kommentaren
-	// Visualisation: o, e, c
-   	// Visualisation: b/p, d/q
-   	// "She might not be able to tell the difference between letters that look similar in shape such as o and e and c"
-   	// "She might not be able to tell the difference between letters that have similar shape but different orientation, such as b and p and d and q"
-   	function drawVisualForString(visualisationSentence){
-
-   		// Div containing the visualisation.
-   		var divForVisualisation = createDivWithVisualisation(visualisationSentence);
-   		divForVisualisation.attr('id', 'div_for_vis');
-
-		// Input field.
-		var divForInput = createInputForm();
-
-	   	// Continue button.
-	   	var divForButton = createContinueButton();
-
-	   	// Add it to the DOM.
-	    $("#wrapper").append(divForVisualisation, divForInput, divForButton); 
-   	}
-
-
-	// Visualisation: jumping letters
-   	// "The letters might look all jumbled up and out of order."
-   	function drawJumpingLettersVisual(visualisationSentence){
-   		drawVisualForString(visualisationSentence);
-
-   		runScramble(); // Located in scramble.js.
-   	}
-
-
-   	// Visualisation: Pushed together.
+	// Visualisation 1: Pushed together.
    	// "The letters and words might look all bunched together"
-   	function drawSpacingVisual(visualisationSentence){
+   	function drawPushedTogetherVisual(visualisationSentence){
 
 	    // Div for visualisation.
 	    var divForVisualisation = createDivForVisualisation();
@@ -626,8 +650,46 @@ $(document).ready(function(){
    	}
 
 
-	// Visualisation: backwards and upside down.
-   	// "Some letters might appear as backwards or upside down"
+   	// Visualisation 2: Some words might appear backwards.
+	// "The letters of some words might appear completely backwards, such as the word bird looking like drib"
+	function drawReversedWordsVisual(visualisationSentence){
+		drawVisualForString( prepareStringReversedWords(visualisationSentence) );
+	}
+
+
+   	// Visualisation 3: o, e, c.
+	// "Might not be able to tell the difference between letters that look similar in shape such as o and e and c".
+	function drawCEOVisual(visualisationSentence){
+		drawVisualForString( prepareStringCEOVisual(visualisationSentence) );
+	}
+   	
+
+	// Visualisation 4: b/p, d/q.
+   	// "Might not be able to tell the difference between letters that have similar 
+   	// shape but different orientation, such as b and p and d and q".
+	function drawDQBPVisual(visualisationSentence){
+		drawVisualForString( prepareStringDQBPVisual(visualisationSentence) );
+	}
+
+
+	// Visualisation 5: Jumping letters
+   	// "The letters might look all jumbled up and out of order."
+   	function drawJumpingLettersVisual(visualisationSentence){
+   		drawVisualForString(visualisationSentence);
+
+   		runScramble(); // Located in scramble.js.
+   	}
+
+
+	// Visualisation 6: Incorrect spacing.
+	// Words are sometimes spaced incorrectly.
+	function drawIncorrectSpacingVisual(visualisationSentence){
+		drawVisualForString( prepareStringIncorrectSpacingVisual(visualisationSentence) );
+	}
+	
+
+	// Visualisation 7: Backwards and upside down.
+   	// "Some letters might appear as backwards or upside down".
    	function drawBackwardsVisual(visualisationSentence){
 
 		var divForVisualisation = createDivForVisualisation();
@@ -650,63 +712,30 @@ $(document).ready(function(){
    	}
 
 
+   	// Similar to a utility function. It draws a visual with the input argument string. 
+   	function drawVisualForString(visualisationSentence){
 
+   		// Div containing the visualisation.
+   		var divForVisualisation = createDivWithVisualisation(visualisationSentence);
+   		divForVisualisation.attr('id', 'div_for_vis');
 
+		// Input field.
+		var divForInput = createInputForm();
 
-   	// Kanske inte göra denna för måste ha en källa för detta.
-   	// SHAKE EFFECT
-	// https://stackoverflow.com/questions/18801874/how-to-shake-a-div-vertically-using-jquery-shake
-	function drawVisualisation6(){
+	   	// Continue button.
+	   	var divForButton = createContinueButton();
 
+	   	// Add it to the DOM.
+	    $("#wrapper").append(divForVisualisation, divForInput, divForButton); 
    	}
 
-   	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   	// Hantera när man skriver input så byts bokstäver random också
-   	// 
 
 
    	// TODO-LIST:
    	// - ha en källa på skrivproblem för dyslektiker
-   	// - Skriv blockkommentarer eller lägg de i olika scripts
-   	// - Press enter to submit answer
-   	// - Komprimera visual funktionerna som alla skapar en div, input, button och lägg prepare string  funktions istället
-   	// -    	// TODO: Skriv om funktionerna som är const, så man kan
-   	// skicka in en sträng och tex byta bokstäver med
-   	// var res = str.replace("o", "e");
+   	// - lägg de i olika scripts
+   	// - https://www.dyslexia.com/question/what-dyslexics-see/
+   	// - Skriv om med recursion för typing simulation och ändra hur bokstäver ändras (optional)
+   	// - se google keep!
 
-
-   	
-
-	// Source: https://www.dyslexia.com/question/what-dyslexics-see/
-	//---------------------------------------------------------------------
-	// Mål: Visa alla en och en, sen tydlig säga: 
-	// "dyslektiker har olika severe dyslexi, och kan ha flera kombinationer av dessa, här kan det se ut när 1, 3, 5 tillsammans skrivs"
-	// All text i programmet ska vara informationstext om dyslexi taget från någon känd dyslexi-sida med källa
-
-
-	// 2. She might see text appearing to jump around on a page
-	// Skriva ord med delim, som byter plats med varandra genom en random som plussar dessa separata ord till en string out += words;
-	// eller gör med jquery från fiddlen här https://stackoverflow.com/questions/4822524/continuous-movement-animation-with-jquery
-});
-
-
-// MISC CODE
-
-
-        // var sentence = $("#testText").text(); // Retrieve the text from the p-tag.
-        // console.log("sentence = " + sentence);
-        // console.log("sentence[1] = " + sentence[1]);
-
-        // // Save the correct answer.
-        // var answer1 = sentence;
-
-        // // Change the text in the p-tag.
-        // $("#testText").text("replaced the text");
-
-        // $('body').html($('<div class="spinner"></div>'));
-        // $("#wrapper").html($('<h2>nyligen skapat objekt</h2>'));
-        // var txt1 = "<p>Text.</p>";              // Create text with HTML
-	    // var txt2 = $("<p></p>").text("Text.");  // Create text with jQuery
-	    // var txt3 = document.createElement("p");
-	    // txt3.innerHTML = "Text.";               // Create text with DOM
-	    // $("#wrapper").append(txt1, txt2, txt3);     // Append new elements	   
+}); 

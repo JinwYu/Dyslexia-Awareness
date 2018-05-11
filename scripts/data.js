@@ -26,7 +26,7 @@ var visualisation4 = {
 	correctAnswer:"This sequence of words is probably hard to decipher but fortunately not impossible", 
 	title:"Visualisation 4", 
 	source: "Source: dyslexia.com",
-	information:"She might not be able to tell the difference between letters that have similar shape but different orientation, such as b and p and d and q",
+	information:"Might not be able to tell the difference between letters that have similar shape but different orientation, such as b and p and d and q",
 	sentenceToVisualise: "This sequence of words is probably hard to decipher but fortunately not impossible"
 };
 
