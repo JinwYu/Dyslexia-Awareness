@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var currentSentenceToVisualise;
 
 	// Program variables.
-	var totalNumScreens = 20;
+	var totalNumScreens = 23;
 	var currentScreen = 0;
 	/* ************************
 		Start screen = 1;
@@ -27,6 +27,7 @@ $(document).ready(function(){
 	/*                   PROGRAM FUNCTIONS                   */
 	/*                                                       */
 	/* ***************************************************** */	
+
 
 
 	// Function that draws the content in the div wrapper.
@@ -74,15 +75,15 @@ $(document).ready(function(){
 		        drawBackwardsVisual(currentSentenceToVisualise);
 		        break;
 		    case 16:
-		        
+		    	drawCombination3and4(currentSentenceToVisualise);
 		        break;
 		    case 18:
-		        // Final screen.
-		        location.reload();
-
-		        //UTÖKA DETTA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-		        // Draw end screen med nåt simpelt, sen continue kallar location.reload
+		    	drawCombination3and4and7(currentSentenceToVisualise);
+		        break;
+		    case 20:
+		        drawCombination5and6(currentSentenceToVisualise);
+		        break;
+		    case 22:
 		}
    	}
 
@@ -125,8 +126,17 @@ $(document).ready(function(){
 		    case 17: case 18:
 		    	tempVisualisationInfo = visualisation9;
 		        break;
-		    case 19:
+		    case 19: case 20:
+		    	tempVisualisationInfo = visualisation10;
+		        break;
+		    case 21:
 		        // Final screen.
+		        tempVisualisationInfo = visualisation11;
+		        break;
+		    case 22:
+		    	// Final screen.
+		        location.reload();
+		        break;
 		}
 
    		currentCorrectAnswer = tempVisualisationInfo.correctAnswer;
@@ -171,11 +181,45 @@ $(document).ready(function(){
 	    $("#wrapper").append(titleText, line, infoText, sourceText, divForButton); 
    	}	
 
+   	// Creating all elements to add to the div wrapper.
+   	function drawInfoScreen(screenIndex){
+		
+	    clearElementsInWrapper();
+	    
+	    // Title text.
+	    var titleText = $("<h1></h1>"); 
+	    titleText.addClass("text_h1_center grey_text title_font");
+	    //titleText.text("Simulation " + screenIndex);
+	    titleText.text(currentTitle);
+
+	    var line = $("<hr>");
+
+	    // Information text.
+	    var infoText = $("<p></p>");
+	    infoText.addClass("text_info info_text");	    
+	    //infoText.load("/text_files/simulation" + screenIndex + ".txt");
+	    infoText.text(currentInformation);
+
+	    // Div that the button will be inside.
+	    var divForButton = createContinueButton();
+
+	    // Source text.
+	    var sourceText = $("<p></p>");
+	    sourceText.addClass("text_info");	    
+	    //infoText.load("/text_files/simulation" + screenIndex + ".txt");
+	    sourceText.text(currentSource);
+
+	    // Add it to the DOM.
+	    $("#wrapper").append(titleText, line, infoText, sourceText, divForButton); 
+   	}	
+
+
 
 	/* ***************************************************** */
 	/*                      LISTENERS                        */
 	/*                                                       */
 	/* ***************************************************** */
+
 
 
 	// Allow submission of the answer by pressing the enter-key.
@@ -317,10 +361,12 @@ $(document).ready(function(){
 	});
 
 
+
 	/* ***************************************************** */
 	/*                   UTILITY FUNCTIONS                   */
 	/*                                                       */
 	/* ***************************************************** */
+
 
 
 	// Function to increment the current screen.
@@ -443,10 +489,13 @@ $(document).ready(function(){
 		return divForButton;
 	}
 
+
+
 	/* ***************************************************** */
 	/*            PREPARE STRING FOR VISUALISATION           */
 	/*                                                       */
 	/* ***************************************************** */
+
 
 
 	// Preparation for the visual for reversed words. (Visualisation 2)
@@ -599,14 +648,7 @@ $(document).ready(function(){
 	/*                    VISUALISATIONS                     */
 	/*                                                       */
 	/* ***************************************************** */
-	// Visualisations that allow combinations, beware of the 
-	// order in which they are executed:
-	//   - DQ, BP
-	//   - Reversed Words
-	//	 - Jumping letters (Call this last)
-	// 	 - Pushed together (Call this last)
-	// 	 - Backwards & upside down (Call this last)
-	/* ***************************************************** */
+
 
 
 	// Visualisation 1: Pushed together.
@@ -730,6 +772,65 @@ $(document).ready(function(){
    	}
 
 
+
+	/* ***************************************************** */
+	/*              VISUALISATION COMBINATIONS               */
+	/*                                                       */
+	/* ***************************************************** */
+	// Visualisations that allow combinations, beware of the 
+	// order in which they are executed:
+	//
+	// 	 - Vis. 1: Pushed together (Call this last)
+	//   - Vis. 2: Reversed words
+	// 	 - Vis. 3: c/e/o
+	//   - Vis. 4: d/q & b/p
+	//	 - Vis. 5: Jumping letters (Call this last)
+	//	 - Vis. 6: Incorrect spacing
+	// 	 - Vis. 7: Backwards and upside down. (Call this last)
+	/* ***************************************************** */
+
+
+
+   	// Combination of visualisations: 1 & 2 (Pushed together & Reversed words)
+   	// Hard to decipher.
+   	function drawCombination1and2(visualisationSentence){
+   		// Prepare string for visualisation 2.
+   		var preparedForVis2 = prepareStringReversedWords(visualisationSentence);
+
+   		// Draw visualisation 1.
+   		drawPushedTogetherVisual(preparedForVis2);
+   	}
+
+
+   	// Combination of visualisations: 3 & 4 (c/e/o & d/q & b/p)
+   	function drawCombination3and4(visualisationSentence){
+   		var preparedForVis3 = prepareStringCEOVisual(visualisationSentence);
+   		drawDQBPVisual(preparedForVis3);
+   	}
+
+
+   	// Combination of visualisations: 5 & 6 (Jumping letters & Incorrect spacing)
+   	function drawCombination5and6(visualisationSentence){
+   		var preparedForVis6 = prepareStringIncorrectSpacingVisual(visualisationSentence);
+   		drawJumpingLettersVisual(preparedForVis6);
+   	}
+
+   	
+   	// Combination of visualisations: 6 & 7 (Incorrect spacing & Backwards and upside down)
+   	// Hard to decipher.
+   	function drawCombination6and7(visualisationSentence){
+   		var preparedForVis6 = prepareStringIncorrectSpacingVisual(visualisationSentence);
+   		drawBackwardsVisual(preparedForVis6);
+   	}
+
+
+   	// Combination of visualisations: 3, 4 & 7 (c/e/o & d/q & b/p & Backwards and upside down)
+   	function drawCombination3and4and7(visualisationSentence){
+   		var preparedForVis3 = prepareStringCEOVisual(visualisationSentence);
+   		var preparedForVis4 = prepareStringDQBPVisual(preparedForVis3);
+   		drawBackwardsVisual(preparedForVis4);
+   	}
+   	
 
    	// TODO-LIST:
    	// - ha en källa på skrivproblem för dyslektiker

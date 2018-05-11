@@ -55,19 +55,36 @@ var visualisation7 = {
 };
 
 var visualisation8 = {
-	correctAnswer:"8", 
+	correctAnswer:"Whales need to reach the surface of the ocean to breathe because they cannot breathe underwate", 
 	title:"Visualisation 8", 
 	source: "Source: dyslexia.com",
-	information:"Now you have only seen symptoms one by one, but a person with dyslexia can have combinations of these, for example the next screen will have a combination of visual and visual, as before, this is not exactly how it is, it is just to give an idea how it can feel",
-	sentenceToVisualise: ""
+	information:"Now you have only seen symptoms one by one, but a person with dyslexia can have combinations of these, for example the next screen will have a combination of visual and visual, as before, this is not exactly how it is, it is just to give an idea how it can feel. Combination of visualisations: 3 & 4, (c/e/o & d/q & b/p). ",
+	sentenceToVisualise: "Whales need to reach the surface of the ocean to breathe because they cannot breathe underwate"
 };
-
-
 
 var visualisation9 = {
-	correctAnswer:"", 
-	title:"9", 
+	correctAnswer:"Sharks come in a wide variety of shapes and sizes", 
+	title:"Visualisation 9", 
 	source: "Source: dyslexia.com",
-	information:"9",
+	information:"Combination of visualisations: 3, 4 & 7 (c/e/o & d/q & b/p & Backwards and upside down)",
+	sentenceToVisualise: "Sharks come in a wide variety of shapes and sizes"
+};
+
+var visualisation10 = {
+	correctAnswer:"When a bear hibernates it is in a deep sleep", 
+	title:"Visualisation 10", 
+	source: "Source: dyslexia.com",
+	information:"Here's a Combination of visualisations: 5 & 6 (Jumping letters & Incorrect spacing).",
+	sentenceToVisualise: "When a bear hibernates it is in a deep sleep"
+};
+
+// End screen.
+var visualisation11 = {
+	correctAnswer:"", 
+	title:"Final words", 
+	source: "",
+	information:"Hope this has made you more aware of dyslexia. Click continue to start from the beginning.",
 	sentenceToVisualise: ""
 };
+
+
