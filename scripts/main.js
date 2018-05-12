@@ -145,7 +145,7 @@ $(document).ready(function(){
 		currentSource = tempVisualisationInfo.source;
 		currentSentenceToVisualise = tempVisualisationInfo.sentenceToVisualise;
 
-		console.log("initCurrentScreen has been executed!" + ", currentSentenceToVisualise = " + currentSentenceToVisualise);
+		//console.log("initCurrentScreen has been executed!" + ", currentSentenceToVisualise = " + currentSentenceToVisualise);
    	}  	
 
 
@@ -239,7 +239,6 @@ $(document).ready(function(){
 
     // On click listener for dynamically created buttons.
    	$("#wrapper").on("click", "button.button_continue_class", function(){
-   		console.log("dynamically created continue button clicked!");
    		incrementCurrentScreen();
    		initCurrentScreen();
     	createElementsForScreen(currentScreen);
@@ -252,8 +251,9 @@ $(document).ready(function(){
 		// Retrieve answer from input field.
 		var retrievedAnswer = $("#input_answer").val();
 		retrievedAnswer = retrievedAnswer.toLowerCase();
+		retrievedAnswer = retrievedAnswer.trim();
 
-		console.log("retrievedAnswer = " + retrievedAnswer + ", currentCorrectAnswer = " + currentCorrectAnswer);
+		//console.log("retrievedAnswer = " + retrievedAnswer + ", currentCorrectAnswer = " + currentCorrectAnswer);
 
 		// Validate answer and change the label accordingly.
 		if(currentCorrectAnswer.toLowerCase() === retrievedAnswer){
@@ -261,7 +261,7 @@ $(document).ready(function(){
 			$("#input_label").css("color", "#70db70");
 		}
 		else{
-			$("#input_label").html("Wrong, but you can still continue");
+			$("#input_label").html("Wrong, try again or continue");
 			$("#input_label").css("color", "#ff8080");
 		}
 	});
@@ -273,7 +273,6 @@ $(document).ready(function(){
 	    const key = event.key; // const {key} = event; ES6+
 	    if (key === "Backspace" || key === "Delete") {
 	        //return false;
-	        console.log("PRESSSSSSSSSSED");
 	        numTimesDeletedChars++;
 	    }
 	});
@@ -843,3 +842,4 @@ $(document).ready(function(){
 	// - Have visualisations with lots of text instead of sentences.
 	// - Refactor code that handles different screens, it is not elegant but it works so...
 	// - Move all css-code to the css-files but I'm lazy 
+	// - Fix mobile compatibility
