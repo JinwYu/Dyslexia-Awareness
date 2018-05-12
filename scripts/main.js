@@ -587,7 +587,7 @@ $(document).ready(function(){
 		// Insert random white spaces.
 		for(var i = 0; i < removedWhiteSpaces.length; i++){
 			// Get random number.
-			var randomNr = getRandomNumber(1, 7);
+			var randomNr = getRandomNumber(0, 6);
 
 			// Copy as many chars as the random number.
 			for(var j = 0; j <= randomNr; j++){	
@@ -830,13 +830,16 @@ $(document).ready(function(){
    		var preparedForVis4 = prepareStringDQBPVisual(preparedForVis3);
    		drawBackwardsVisual(preparedForVis4);
    	}
-   	
-
-   	// TODO-LIST:
-   	// - ha en källa på skrivproblem för dyslektiker
-   	// - lägg de i olika scripts
-   	// - https://www.dyslexia.com/question/what-dyslexics-see/
-   	// - Skriv om med recursion för typing simulation och ändra hur bokstäver ändras (optional)
-   	// - se google keep!
 
 }); 
+
+	/* ***************************************************** */
+	/*                      IMPROVEMENTS                     */
+	/*                                                       */
+	/* ***************************************************** */	
+
+	// - Add typing mechanic for the visualisations for d/q & b/p, and c/e/o
+	// - Rewrite the if statements in the function that handles typing in visualisation 5.
+	// - Have visualisations with lots of text instead of sentences.
+	// - Refactor code that handles different screens, it is not elegant but it works so...
+	// - Move all css-code to the css-files but I'm lazy 
