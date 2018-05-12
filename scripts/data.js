@@ -55,11 +55,11 @@ var visualisation7 = {
 };
 
 var visualisation8 = {
-	correctAnswer:"Whales need to reach the surface of the ocean to breathe because they cannot breathe underwate", 
+	correctAnswer:"Whales need to reach the surface of the ocean to breathe because they cannot breathe underwater", 
 	title:"Visualisation 8", 
 	source: "Source: https://www.dyslexia.com/question/what-dyslexics-see",
 	information:"So far you have only been presented with symptoms one at the time, but a person diagnosed with dyslexia can have several symptoms. To illustrate this, the next screen will have a combination of the symptoms from visualisations 3 & 4, which were the to not be able to tell the difference between similarly shaped letters like: c, e and o and not being able to tell the difference between similarly shaped letters but with different orientation, such as b and p and d and q. As previously mentioned, the purpose here is to try to convey how it can feel, not to show exactly how it is.",
-	sentenceToVisualise: "Whales need to reach the surface of the ocean to breathe because they cannot breathe underwate"
+	sentenceToVisualise: "Whales need to reach the surface of the ocean to breathe because they cannot breathe underwater"
 };
 
 var visualisation9 = {
