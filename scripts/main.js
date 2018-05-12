@@ -261,7 +261,7 @@ $(document).ready(function(){
 			$("#input_label").css("color", "#70db70");
 		}
 		else{
-			$("#input_label").html("Try again");
+			$("#input_label").html("Wrong, but you can still continue");
 			$("#input_label").css("color", "#ff8080");
 		}
 	});
