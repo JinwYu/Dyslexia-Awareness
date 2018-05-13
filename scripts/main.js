@@ -843,3 +843,4 @@ $(document).ready(function(){
 	// - Refactor code that handles different screens, it is not elegant but it works so...
 	// - Move all css-code to the css-files but I'm lazy 
 	// - Fix mobile compatibility
+	// - Some way to see the correct answer - Maybe not because the purpose is to show what it can feel like (so an easy answer should not be provided)

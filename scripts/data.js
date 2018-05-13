@@ -71,11 +71,11 @@ var visualisation9 = {
 };
 
 var visualisation10 = {
-	correctAnswer:"When a bear hibernates it is in a deep sleep", 
+	correctAnswer:"Dolphins never chew their food", 
 	title:"Visualisation 10", 
 	source: "",
 	information:"The next one will show a combination of visualisations: 5 & 6 (Jumping letters & Incorrect spacing). The purpose is to try to convey how it can feel trying to read this, not to show exactly how it is.",
-	sentenceToVisualise: "When a bear hibernates it is in a deep sleep"
+	sentenceToVisualise: "Dolphins never chew their food"
 };
 
 // End screen.
